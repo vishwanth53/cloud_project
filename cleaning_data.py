@@ -150,36 +150,4 @@ rules = association_rules(frequent_itemsets, metric="lift", min_threshold=0.05)
 # Display association rules
 #print(rules[['antecedents', 'consequents', 'support', 'confidence', 'lift']].head())
 
-final_df['PURCHASE_DATE'] = pd.to_datetime(final_df['PURCHASE_'], format='%d-%b-%y')
-
-# Assign season based on month
-def get_season(month):
-    if month in [12, 1, 2]:
-        return 'Winter'
-    elif month in [3, 4, 5]:
-        return 'Spring'
-    elif month in [6, 7, 8]:
-        return 'Summer'
-    else:
-        return 'Fall'
-
-final_df['season'] = final_df['PURCHASE_DATE'].dt.month.apply(get_season)
-
-seasonal_sales = final_df.groupby(['season'])['SPEND'].sum().reset_index()
-seasonal_footfall = final_df.groupby(['season'])['BASKET_NUM'].nunique().reset_index()
-
-seasonal_product_sales = final_df.groupby(['season', 'PRODUCT_NUM'])['SPEND'].sum().reset_index()
-
-# Identify top products by season (for example, top 5 products in each season)
-top_products_per_season = seasonal_product_sales.groupby('season').apply(lambda x: x.nlargest(5, 'SPEND')).reset_index(drop=True)
-
-high_demand_products = top_products_per_season[['season', 'PRODUCT_NUM']]
-
-# Assuming a recommendation logic to suggest inventory for products with seasonal spikes
-inventory_recommendation = high_demand_products.groupby('season')['PRODUCT_NUM'].apply(list).reset_index()
-
-#BRand preferences:
-brand_preference = final_df.groupby('BRAND_TY')[['SPEND', 'UNITS']].sum()
-
-organic_preference = final_df.groupby('NATURAL_ORGANIC_FLAG')[['SPEND', 'UNITS']].sum()
 
