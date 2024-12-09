@@ -6,7 +6,7 @@ import pandas as pd
 final_df['PURCHASE_'] = pd.to_datetime(final_df['PURCHASE_'], errors='coerce')
 
 with st.sidebar:
-    st.header('Machine Learning Assignment')
+    st.header('')
 
 st.dataframe(final_df)
 
