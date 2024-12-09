@@ -6,7 +6,7 @@ from cleaning_data import encoded_df, final_df
 
 # Generate frequent itemsets and association rules
 frequent_itemsets = apriori(encoded_df, min_support=0.001, use_colnames=True)
-rules = association_rules(frequent_itemsets, metric="lift", min_threshold=0.3)
+rules = association_rules(frequent_itemsets, metric="lift", min_threshold=0.3,num_itemsets=final_df.shape[0])
 
 # Streamlit UI
 st.title("Association Rules for Retail Basket Analysis")
