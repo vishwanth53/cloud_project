@@ -1,14 +1,7 @@
 import streamlit as st
 import seaborn as sns
 import matplotlib.pyplot as plt
-from cleaning_data import (
-    seasonal_sales,
-    seasonal_footfall,
-    top_products_per_season,
-    inventory_recommendation,
-    brand_preference,
-    organic_preference
-)
+from cleaning_data import ( seasonal_sales, seasonal_footfall, top_products_per_season, inventory_recommendation, brand_preference, organic_preference )
 
 # Setting up Tabs
 tab1, tab2 = st.tabs(["Seasonal Trends", "Brand and Organic Preferences"])
