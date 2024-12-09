@@ -145,7 +145,7 @@ frequent_itemsets = apriori(encoded_df, min_support=0.0005, use_colnames=True)
 #print(frequent_itemsets.head())
 
 # Generate association rules
-rules = association_rules(frequent_itemsets, metric="lift", min_threshold=0.05,)
+rules = association_rules(frequent_itemsets, metric="lift", min_threshold=0.05)
 
 # Display association rules
 #print(rules[['antecedents', 'consequents', 'support', 'confidence', 'lift']].head())
